@@ -1,9 +1,13 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 
 abstract class ApiService {
-  private static readonly api: AxiosInstance = axios.create({
+  private static api = axios.create({
     baseURL: "https://swapi.dev/api/",
   });
+
+  get api() {
+    return ApiService.api;
+  }
 }
 
 export default ApiService;

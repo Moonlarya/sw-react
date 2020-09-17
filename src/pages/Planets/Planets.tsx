@@ -1,19 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
+import PlanetService from "services/PlanetService";
 
 import Button from "@material-ui/core/Button/Button";
 import PlanetCard from "./PlanetCard";
 
 import "./styles.scss";
 
-const api = "https://swapi.dev/api/";
-
-class Planets extends Component {
+class Planets extends Component<
+  {},
+  {
+    planets: IPlanet[];
+    pageNumber: number;
+    isLoading: boolean;
+    hasNext: boolean;
+    hasPrevious: boolean;
+  }
+> {
   state = {
     planets: [],
-    pageNumber: null,
+    pageNumber: 1,
     isLoading: false,
     hasNext: false,
     hasPrevious: false,
@@ -22,24 +29,18 @@ class Planets extends Component {
   loadInfo = async (pageNumber = 1) => {
     try {
       this.setState({ isLoading: true });
-      const response = await axios({
-        url: `${api}planets/`,
-        params: {
-          page: pageNumber,
-        },
-      });
 
-      const { results } = response.data;
+      const response = await PlanetService.getAll(pageNumber);
 
-      this.setState({ planets: results, pageNumber });
+      this.setState({ planets: response.results, pageNumber });
 
-      if (response.data.next) {
+      if (response.next) {
         this.setState({ hasNext: true });
       } else {
         this.setState({ hasNext: false });
       }
 
-      if (response.data.previous) {
+      if (response.previous) {
         this.setState({ hasPrevious: true });
       } else {
         this.setState({ hasPrevious: false });

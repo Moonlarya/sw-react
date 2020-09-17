@@ -16,7 +16,6 @@ const PlanetCard: FC<IPlanetCardProps> = ({ name }) => (
       <Typography variant="h5" component="h2">
         {name}
       </Typography>
-      <Typography color="textSecondary" gutterBottom></Typography>
     </CardContent>
     <CardActions>
       <Button size="small">Learn More</Button>

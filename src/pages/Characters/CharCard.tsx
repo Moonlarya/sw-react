@@ -23,6 +23,9 @@ const CharCard: FC<ICharCardProps> = ({ name, gender, birth_year }) => (
       <Typography color="textSecondary" gutterBottom>
         {gender}
       </Typography>
+      <Typography color="textSecondary" gutterBottom>
+        {birth_year}
+      </Typography>
     </CardContent>
     <CardActions>
       <Button size="small">Learn More</Button>

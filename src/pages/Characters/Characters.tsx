@@ -10,6 +10,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+import CharacterService from "services/CharacterService";
+
 import CharCard from "./CharCard";
 
 import "./styles.scss";
@@ -19,23 +21,13 @@ const api = "https://swapi.dev/api/";
 class Characters extends Component {
   state = {
     characters: null,
-    episode: null,
+    episode: "",
     isLoading: false,
   };
   loadInfo = async () => {
     const { episode } = this.state;
-    const info = await axios.get(`${api}films/${episode}/`);
-
-    const charArr = await Promise.all(
-      info.data.characters.map((el) =>
-        axios.get(el.replace("http", "https")).then((response) => ({
-          name: response.data.name,
-          birth_year: response.data.birth_year,
-          gender: response.data.gender,
-        }))
-      )
-    );
-    this.setState({ characters: charArr });
+    const info = await CharacterService.getAll(episode);
+    this.setState({ characters: info });
   };
 
   handleChange = (event) => {

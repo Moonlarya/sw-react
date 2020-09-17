@@ -10,7 +10,7 @@ import App from "./App";
 import "./styles.scss";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
