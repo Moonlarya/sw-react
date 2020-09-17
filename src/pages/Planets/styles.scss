@@ -1,0 +1,21 @@
+.button-panel {
+  width: 90%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 99;
+}
+
+.card-list {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+
+  .card {
+    margin: 20px;
+    width: 27%;
+  }
+}
